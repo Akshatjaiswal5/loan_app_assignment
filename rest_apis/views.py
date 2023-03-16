@@ -4,7 +4,7 @@ from rest_apis.models import *
 from .serializers import *
 from django.utils import timezone
 from datetime import datetime
-from django.utils.timezone import make_aware
+from .tasks import calculate_credit_score
 
 
 @api_view(['POST'])
@@ -14,6 +14,7 @@ def registerUser(request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
+            calculate_credit_score.delay(user.id)
             serializer.save(credit_score=1000)
             return Response({"id": user.id})
         else:
