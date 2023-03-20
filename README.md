@@ -1,6 +1,6 @@
 # loan-app
 Hello Everyone!
-I have made this project as an assignment for backend Internship at Bright Money.
+I have made this project as an assignment.
 
 **API Documentation:**
 
